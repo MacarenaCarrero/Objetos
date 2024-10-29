@@ -116,14 +116,61 @@ const classifySentence = (sentence) => {
 
   let secretCode = "";
 
-  secretCode = sentence.replaceAll("a", 1);
-  secretCode = secretCode.replaceAll("e", 2);
-  secretCode = secretCode.replaceAll("i", 3);
-  secretCode = secretCode.replaceAll("o", 4);
-  secretCode = secretCode.replaceAll("u", 4);
+  secretCode = sentence.toLowerCase().replaceAll("a", 1);
+  secretCode = secretCode.toLowerCase().replaceAll("e", 2);
+  secretCode = secretCode.toLowerCase().replaceAll("i", 3);
+  secretCode = secretCode.toLowerCase().replaceAll("o", 4);
+  secretCode = secretCode.toLowerCase().replaceAll("u", 5);
 
   dataStrings.sixthFloor.secretCode = secretCode;
+
+  const consonants = "bcdfghjklmnñpqrstvwyxz";
+
+  for (const letter of sentence.toLowerCase()) {
+    if (consonants.includes(letter)) {
+      const index = consonants.indexOf(letter);
+      if (index === 0) {
+        secretCode = secretCode + "z";
+      } else {
+        secretCode = secretCode + consonants;
+      }
+    }
+    console.log(letter);
+  }
 };
 
 classifySentence("Hola amigose");
+classifySentence("Estamos viendo objetos");
 console.log(dataStrings);
+
+console.clear();
+
+//console.clear
+
+//crea una funcion que reciba una palabra
+//haz que la funcion sustituya cada vocal por su letra anterior en el abecedario
+
+const replaceVowels = (word) => {
+  const vowels = "aeiou";
+  const alphabet = "abcdefghijklmnñopqrstuvwxyz";
+  const consonants = "bcdfghjklmñpqrstvwyz";
+  let newWord = "";
+
+  for (const letter of word.toLowerCase()) {
+    const index = alphabet.indexOf(letter);
+    if (vowels.includes(letter)) {
+      console.log(index);
+      if (letter === "a") {
+        newWord = newWord + "z";
+      } else {
+        newWord = newWord + alphabet.charAt(index - 1);
+      }
+    } else if (consonants.includes(letter)) {
+      newWord = newWord + alphabet.charAt(index + 2);
+    }
+  }
+
+  console.log(newWord);
+};
+
+replaceVowels("holitaaaaa");
